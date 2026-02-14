@@ -74,7 +74,7 @@ display:none;
 
 <h2>Untuk Kamu 💌</h2>
 
-<img src="foto.jpg">
+<img id="slide" src="foto1.jpg">
 
 <p id="text"></p>
 
@@ -91,7 +91,8 @@ display:none;
 
 <script>
 
-let message="Hai Nita... Aku Fian 🥺\n\nWalaupun kita LDR 🌍 Tapi hati aku selalu dekat sama kamu 💞\n\nAku kangen peluk kamu 😭\nKadang pengen ketemu tapi cuma bisa liat layar\n\nDi hari Valentine ini...\nAku gak bisa ngasih apa-apa untuk kamu 😔\nCuma ini yang bisa aku kasih\nSebuah pesan kecil dari orang yang selalu sayang kamu ❤️\n\nMaaf aku belum bisa bahagiain kamu sepenuhnya...\nMaaf aku belum bisa ada setiap saat kamu butuh\n\nTapi aku janji...\nAku akan tetap disini\nBersamamu dan akan selalu mencintaimu 😘\n\nSemoga suatu hari nanti\nKita bisa rayain Valentine bareng 🌹";
+let message="Hai Nita... Aku Fian 🥺\n\nWalaupun kita LDR 🌍 Tapi hati aku selalu dekat sama kamu 💞\n\nAku kangen peluk kamu 😭\nKadang pengen ketemu tapi cuma bisa liat layar\n\nDi hari Valentine ini...\nAku gak bisa ngasih apa-apa untuk kamu 😔\nCuma ini yang bisa aku kasih\nSebuah pesan kecil dari orang yang selalu sayang kamu ❤️\n\nMaaf aku belum bisa bahagiain kamu sepenuhnya...\nMaaf aku belum bisa ada setiap saat kamu butuh\n\nTapi aku janji...\nAku akan tetap disini\nNunggu waktu sampai kita bisa bareng lagi 🥺\n\nSemoga suatu hari nanti\nKita bisa rayain Valentine bareng 🌹";
+
 let i=0;
 function type(){
 if(i<message.length){
@@ -101,6 +102,16 @@ setTimeout(type,50);
 }
 }
 
+function slideFoto(){
+let images=["foto1.jpg","foto2.jpg"];
+let x=0;
+setInterval(()=>{
+x++;
+if(x>=images.length){x=0;}
+document.getElementById("slide").src=images[x];
+},3000);
+}
+
 function cek(){
 let p=document.getElementById("pw").value;
 if(p=="nita123"){
@@ -108,6 +119,7 @@ document.getElementById("login").style.display="none";
 document.getElementById("step2").style.display="block";
 document.getElementById("music").play();
 startLove();
+slideFoto();
 type();
 }else{
 alert("Wrong Password 😭");
@@ -124,7 +136,7 @@ document.getElementById("result").innerHTML="Happy Valentine From Fian 💘";
 }
 
 function no(){
-document.getElementById("result").innerHTML="Aku Tetap Sayang Kamu 🥰😘";
+document.getElementById("result").innerHTML="Aku Tetap Sayang Kamu 😭";
 }
 
 function startLove(){
