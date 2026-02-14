@@ -1,69 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Nita 💞</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {
-  margin:0;
-  background:black;
-  color:white;
-  text-align:center;
-  font-family:sans-serif;
-  overflow:hidden;
+body{
+margin:0;
+height:100vh;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:sans-serif;
+overflow:hidden;
+color:white;
 }
 
-#login {
-  margin-top:40%;
+.card{
+background:rgba(255,255,255,0.2);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+text-align:center;
+box-shadow:0 0 30px rgba(255,255,255,0.3);
 }
 
-input {
-  padding:10px;
-  border-radius:10px;
-  border:none;
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+margin:10px;
+background:white;
+color:#ff4e91;
+font-weight:bold;
 }
 
-button {
-  padding:10px 20px;
-  border:none;
-  border-radius:10px;
-  margin:10px;
-  background:pink;
-  color:white;
+img{
+width:200px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 0 25px pink;
 }
 
-#main {
-  display:none;
-  margin-top:30%;
+.heart{
+position:absolute;
+font-size:20px;
+animation:fall 5s linear infinite;
 }
 
-.heart {
-  position:absolute;
-  color:pink;
-  font-size:20px;
-  animation:fall 5s linear infinite;
+@keyframes fall{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
 }
 
-@keyframes fall {
-  0% {transform:translateY(-10vh);}
-  100% {transform:translateY(110vh);}
+#step2,#main{
+display:none;
 }
 </style>
 </head>
 
 <body>
 
-<div id="login">
-<h2>Masukkan Password 🔐</h2>
+<audio id="music" src="lagu.mp3"></audio>
+
+<div id="login" class="card">
+<h2>Happy Valentine 💘</h2>
 <input type="password" id="pw">
 <br>
-<button onclick="cek()">Masuk</button>
+<button onclick="cek()">Unlock My Heart</button>
 </div>
 
-<div id="main">
-<h2>Do You Love Me? 💖</h2>
+<div id="step2" class="card">
+
+<h2>Untuk Kamu 💌</h2>
+
+<img src="foto.jpg">
+
+<p id="text"></p>
+
+<button onclick="next()">Next</button>
+
+</div>
+
+<div id="main" class="card">
+<h2>Will You Be My Valentine? 💖</h2>
 <button onclick="yes()">YES</button>
 <button onclick="no()">NO</button>
 <h3 id="result"></h3>
@@ -71,24 +91,40 @@ button {
 
 <script>
 
+let message="Hai Nita... Aku Fian 🥺\n\nWalaupun kita LDR 🌍 Tapi hati aku selalu dekat sama kamu 💞\n\nAku kangen peluk kamu 😭\nKadang pengen ketemu tapi cuma bisa liat layar\n\nDi hari Valentine ini...\nAku gak bisa ngasih apa-apa untuk kamu 😔\nCuma ini yang bisa aku kasih\nSebuah pesan kecil dari orang yang selalu sayang kamu ❤️\n\nMaaf aku belum bisa bahagiain kamu sepenuhnya...\nMaaf aku belum bisa ada setiap saat kamu butuh\n\nTapi aku janji...\nAku akan tetap disini\nBersamamu dan akan selalu mencintaimu 😘\n\nSemoga suatu hari nanti\nKita bisa rayain Valentine bareng 🌹";
+let i=0;
+function type(){
+if(i<message.length){
+document.getElementById("text").innerHTML+=message.charAt(i);
+i++;
+setTimeout(type,50);
+}
+}
+
 function cek(){
 let p=document.getElementById("pw").value;
 if(p=="nita123"){
 document.getElementById("login").style.display="none";
-document.getElementById("main").style.display="block";
-startMusic();
+document.getElementById("step2").style.display="block";
+document.getElementById("music").play();
 startLove();
+type();
 }else{
-alert("Password Salah 😭");
+alert("Wrong Password 😭");
 }
+}
+
+function next(){
+document.getElementById("step2").style.display="none";
+document.getElementById("main").style.display="block";
 }
 
 function yes(){
-document.getElementById("result").innerHTML="I Love You So Much Nita 💞";
+document.getElementById("result").innerHTML="Happy Valentine From Fian 💘";
 }
 
 function no(){
-document.getElementById("result").innerHTML="Yah Ditolak 😭";
+document.getElementById("result").innerHTML="Aku Tetap Sayang Kamu 🥰😘";
 }
 
 function startLove(){
@@ -102,32 +138,6 @@ setTimeout(()=>c.remove(),5000);
 },300);
 }
 
-function startMusic(){
-const AudioContext=window.AudioContext||window.webkitAudioContext;
-const ctx=new AudioContext();
-
-function play(freq,time){
-let o=ctx.createOscillator();
-let g=ctx.createGain();
-o.connect(g);
-g.connect(ctx.destination);
-o.frequency.value=freq;
-o.type="sine";
-g.gain.setValueAtTime(0.2,ctx.currentTime);
-o.start();
-o.stop(ctx.currentTime+time);
-}
-
-let melody=[262,294,330,349,392,440,494,523];
-let i=0;
-
-setInterval(()=>{
-play(melody[i%melody.length],0.4);
-i++;
-},500);
-}
-
 </script>
-
 </body>
 </html>
