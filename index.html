@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Nita 💞</title>
+
+<style>
+body {
+  margin:0;
+  background:black;
+  color:white;
+  text-align:center;
+  font-family:sans-serif;
+  overflow:hidden;
+}
+
+#login {
+  margin-top:40%;
+}
+
+input {
+  padding:10px;
+  border-radius:10px;
+  border:none;
+}
+
+button {
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  margin:10px;
+  background:pink;
+  color:white;
+}
+
+#main {
+  display:none;
+  margin-top:30%;
+}
+
+.heart {
+  position:absolute;
+  color:pink;
+  font-size:20px;
+  animation:fall 5s linear infinite;
+}
+
+@keyframes fall {
+  0% {transform:translateY(-10vh);}
+  100% {transform:translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div id="login">
+<h2>Masukkan Password 🔐</h2>
+<input type="password" id="pw">
+<br>
+<button onclick="cek()">Masuk</button>
+</div>
+
+<div id="main">
+<h2>Do You Love Me? 💖</h2>
+<button onclick="yes()">YES</button>
+<button onclick="no()">NO</button>
+<h3 id="result"></h3>
+</div>
+
+<script>
+
+function cek(){
+let p=document.getElementById("pw").value;
+if(p=="nita123"){
+document.getElementById("login").style.display="none";
+document.getElementById("main").style.display="block";
+startMusic();
+startLove();
+}else{
+alert("Password Salah 😭");
+}
+}
+
+function yes(){
+document.getElementById("result").innerHTML="I Love You So Much Nita 💞";
+}
+
+function no(){
+document.getElementById("result").innerHTML="Yah Ditolak 😭";
+}
+
+function startLove(){
+setInterval(()=>{
+let c=document.createElement("div");
+c.className="heart";
+c.innerHTML="💖";
+c.style.left=Math.random()*100+"vw";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),5000);
+},300);
+}
+
+function startMusic(){
+const AudioContext=window.AudioContext||window.webkitAudioContext;
+const ctx=new AudioContext();
+
+function play(freq,time){
+let o=ctx.createOscillator();
+let g=ctx.createGain();
+o.connect(g);
+g.connect(ctx.destination);
+o.frequency.value=freq;
+o.type="sine";
+g.gain.setValueAtTime(0.2,ctx.currentTime);
+o.start();
+o.stop(ctx.currentTime+time);
+}
+
+let melody=[262,294,330,349,392,440,494,523];
+let i=0;
+
+setInterval(()=>{
+play(melody[i%melody.length],0.4);
+i++;
+},500);
+}
+
+</script>
+
+</body>
+</html>
